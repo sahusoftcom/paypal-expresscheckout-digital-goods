@@ -1,0 +1,23 @@
+{
+    "name": "sahusoftcom/paypal-expresscheckout-digital-goods",
+    "description": "PHP (Laravel) Package for PayPal Express CheckOut of Digital Goods",
+    "authors": [
+        {
+            "name": "faizahmedfarooqui",
+            "email": "faiz@sahusoft.com"
+        },
+        {
+            "name": "ilasahu",
+            "email": "ila@geekyants.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SahusoftCom\\PayPal\\": "src/"
+        }
+    }
+}
