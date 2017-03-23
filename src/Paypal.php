@@ -38,10 +38,7 @@ class PayPal
 			return ['status' => false, 'message' => 'TOTAL_AMOUNT is required!'];
 		
 		if ( empty($data['AMOUNT']) )
-			return ['status' => false, 'message' => 'AMOUNT is required!'];			
-
-		if ( empty($data['DESCRIPTION']) )
-			return ['status' => false, 'message' => 'DESCRIPTION is required!'];
+			return ['status' => false, 'message' => 'AMOUNT is required!'];					
 
 		if ( empty($data['PAYMENT_ACTION']) )
 			return ['status' => false, 'message' => 'PAYMENT_ACTION is required!'];
@@ -49,7 +46,7 @@ class PayPal
 		if ( empty($data['ITEM_LIST']) || count($data['ITEM_LIST']) <= 0 )
 			return ['status' => false, 'message' => 'Atleast one item in ITEM_LIST is required!'];
 
-		$nvpStr = "&METHOD=$data[METHOD]"									// set SALE
+		$nvpStr = "&METHOD=SetExpressCheckout"									// set SALE
 
 		. "&RETURNURL=$data[RETURNURL]"
 		. "&CANCELURL=$data[CANCELURL]"
@@ -58,9 +55,11 @@ class PayPal
 		. "&PAYMENTREQUEST_0_AMT=$data[TOTAL_AMOUNT]"
 		. "&PAYMENTREQUEST_0_ITEMAMT=$data[AMOUNT]"
 		. "&PAYMENTREQUEST_0_TAXAMT=$data[TAX_AMOUNT]"
-		. "&PAYMENTREQUEST_0_DESC=$data[DESCRIPTION]"
 		. "&PAYMENTREQUEST_0_PAYMENTACTION=$data[PAYMENT_ACTION]";
 
+		if ( !empty($data['DESCRIPTION']) )
+			$nvpStr .= "&PAYMENTREQUEST_0_DESC=$data[DESCRIPTION]";
+			
 		if ( !empty($data['NOSHIPPING']) )
 			$nvpStr .= "&NOSHIPPING=$data[NOSHIPPING]";						// set 1
 		else
