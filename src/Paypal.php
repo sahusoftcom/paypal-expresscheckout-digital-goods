@@ -21,8 +21,6 @@ class PayPal
 	{
 		$data['PAYMENT_ACTION'] = "sale";
 		$data['METHOD'] = "SetExpressCheckout";
-		// $data['RETURNURL'] = 'https://market.nativebase.io/getDone';
-		// $data['CANCELURL'] = 'https://market.nativebase.io/getCancel';
 
 		if ( empty($data['METHOD']) )
 			return ['status' => false, 'message' => "METHOD is required!"];
@@ -51,18 +49,30 @@ class PayPal
 		if ( empty($data['ITEM_LIST']) || count($data['ITEM_LIST']) <= 0 )
 			return ['status' => false, 'message' => 'Atleast one item in ITEM_LIST is required!'];
 
-		//For Testing this is hardcoded. You would want to set these variable values dynamically
-		$nvpStr = "&METHOD=$data[METHOD]"
+		$nvpStr = "&METHOD=$data[METHOD]"									// set SALE
 
-		. "&RETURNURL=$data[RETURNURL]" //set your Return URL here
-		. "&CANCELURL=$data[CANCELURL]" //set your Cancel URL here
+		. "&RETURNURL=$data[RETURNURL]"
+		. "&CANCELURL=$data[CANCELURL]"
 
-		. "&PAYMENTREQUEST_0_CURRENCYCODE=$data[CURRENCY]"
+		. "&PAYMENTREQUEST_0_CURRENCYCODE=$data[CURRENCY]"					// set USD
 		. "&PAYMENTREQUEST_0_AMT=$data[TOTAL_AMOUNT]"
 		. "&PAYMENTREQUEST_0_ITEMAMT=$data[AMOUNT]"
 		. "&PAYMENTREQUEST_0_TAXAMT=$data[TAX_AMOUNT]"
 		. "&PAYMENTREQUEST_0_DESC=$data[DESCRIPTION]"
 		. "&PAYMENTREQUEST_0_PAYMENTACTION=$data[PAYMENT_ACTION]";
+
+		if ( !empty($data['NOSHIPPING']) )
+			$nvpStr .= "&NOSHIPPING=$data[NOSHIPPING]";						// set 1
+		else
+			$nvpStr .= "&NOSHIPPING=1";
+
+		$nvpStr .= "&ADDROVERRIDE=0";										// set 0
+
+		if ( !empty($data['LOGOIMG']) )
+			$nvpStr .= "&LOGOIMG=$data[LOGOIMG]";							// set Business Logo
+
+		if ( !empty($data['BRANDNAME']) )
+			$nvpStr .= "&BRANDNAME=$data[BRANDNAME]";						// set Business Name
 
 		$i = 0;
 		foreach ( $data['ITEM_LIST'] as $item ) {
@@ -71,6 +81,9 @@ class PayPal
 
 			if ( !empty($item['NAME']) )
 				$string .= "&L_PAYMENTREQUEST_0_NAME$i=$item[NAME]";
+
+			if ( !empty($item['ITEMURL']) )
+				$string .= "&L_PAYMENTREQUEST_0_ITEMURL$i=$item[ITEMURL]";	// Product URL
 
 			if ( !empty($item['NUMBER']) )
 				$string .= "&L_PAYMENTREQUEST_0_NUMBER$i=$item[NUMBER]";
@@ -93,7 +106,7 @@ class PayPal
 		
 		// Combine the two strings and make the API Call
 		$reqStr = $this->credStr . $nvpStr;
-		$response = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
+		$response = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);		
 
 		// Check Response
 		if ( $response['ACK'] == "Success" || $response['ACK'] == "SuccessWithWarning" ) {
