@@ -1,6 +1,9 @@
 {
     "name": "sahusoftcom/paypal-expresscheckout-digital-goods",
     "description": "PHP (Laravel) Package for PayPal Express CheckOut of Digital Goods",
+    "keywords": ["paypal", "express", "checkout", "digital-goods", "laravel", "paypal-express-checkout", "paypal-sdk"],
+    "homepage": "https://github.com/sahusoftcom/paypal-expresscheckout-digital-goods",
+    "license": "Sahu Soft India Private Limited",
     "authors": [
         {
             "name": "faizahmedfarooqui",
