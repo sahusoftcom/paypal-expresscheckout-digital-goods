@@ -13,6 +13,5 @@ package.json
 phpunit.xml
 server.php
 webpack.mix.js
-readme.md
 .env
 artisan
