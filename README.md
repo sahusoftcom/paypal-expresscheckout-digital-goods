@@ -86,16 +86,16 @@ class PaymentController {
 	
 	public function getDone()
 	{
-	$object = new \SahusoftCom\PayPal\PaymentResponse($apiContext);
-	$response = $object->handle($this->data);
+    	$object = new \SahusoftCom\PayPal\PaymentResponse($apiContext);
+    	$response = $object->handle($this->data);
 
-	echo "<pre>";
-	print_r($response);
-	echo "</pre>";
+    	echo "<pre>";
+    	print_r($response);
+    	echo "</pre>";
 	}
 	
 	public function getCancel()
 	{
-	// Do your thing
+	   // Do your thing
 	}
 ```
