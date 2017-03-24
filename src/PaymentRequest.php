@@ -76,7 +76,8 @@ class PaymentRequest
 		$i = 0;
 		foreach ( $data['ITEM_LIST'] as $item ) {
 			
-			$string = "&L_PAYMENTREQUEST_0_ITEMCATEGORY$i=Digital";
+			// $string = "&L_PAYMENTREQUEST_0_ITEMCATEGORY$i=Digital";
+			$string = '';
 
 			if ( !empty($item['NAME']) )
 				$string .= "&L_PAYMENTREQUEST_0_NAME$i=$item[NAME]";

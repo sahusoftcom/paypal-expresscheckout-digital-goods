@@ -60,7 +60,8 @@ class PaymentResponse  {
 		$i = 0;
 		foreach ( $data['ITEM_LIST'] as $item ) {
 			
-			$string = "&L_PAYMENTREQUEST_0_ITEMCATEGORY$i=Digital";
+			// $string = "&L_PAYMENTREQUEST_0_ITEMCATEGORY$i=Digital";
+			$string = '';
 
 			if ( !empty($item['NAME']) )
 				$string .= "&L_PAYMENTREQUEST_0_NAME$i=$item[NAME]";
@@ -90,10 +91,20 @@ class PaymentResponse  {
 		$reqStr = $this->credStr . $nvpStr;
 		$doresponse = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
 
-		if ( $doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning" ) {
-			return ['status'=> true, 'message' => "Your Payment Has Completed!", 'response' => $doresponse];
+		if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
+
+			$nvpStr = "&METHOD=GetTransactionDetails&TRANSACTIONID=" . urldecode($doresponse['PAYMENTINFO_0_TRANSACTIONID']);			    
+		    
+		    $reqStr = $this->credStr . $nvpStr;
+			$doresponse = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
+			if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
+
+				header('Location: ' . $data['RETURNURL'].'?'.http_build_query($doresponse), true, 302);
+				exit();
+			}
 		}
 
-		return ['status'=> false, 'message' => "The API Call Failed!", 'response' => $doresponse];		
+		header('Location: ' . $data['CANCELURL'], true, 302);
+		exit();
 	}
 }
