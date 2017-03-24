@@ -1,5 +1,5 @@
 ## PayPal ExpressCheckout Digital Goods Laravel Version: 1.0
-==========================
+
 Service Provider of PayPal.ExpressCheckout.Digital.Goods API for Laravel PHP Framework [[Packagist]]
 [Packagist]: <https://packagist.org/packages/sahusoftcom/paypal-expresscheckout-digital-goods>
 
@@ -41,46 +41,46 @@ use PayPal\PaymentResponse;
 
 class PaymentController {	
 
-    public $apiContext;
+    	public $apiContext;
     
 	public function __construct()
 	{
 	    $apiContext = (object)[];
 		
-        $apiContext->APIUSERNAME = "YOUR-API-USERNAME";
-        $apiContext->APIPASSWORD = "YOUR-API-PASSWORD";
-        $apiContext->APISIGNATURE = "YOUR-API-SIGNATURE";
-        $apiContext->ENDPOINT = "https://api-3t.sandbox.paypal.com/nvp";
-        $apiContext->VERSION = "65.1";
-        $apiContext->REDIRECTURL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=";
+            $apiContext->APIUSERNAME = "YOUR-API-USERNAME";
+            $apiContext->APIPASSWORD = "YOUR-API-PASSWORD";
+            $apiContext->APISIGNATURE = "YOUR-API-SIGNATURE";
+            $apiContext->ENDPOINT = "https://api-3t.sandbox.paypal.com/nvp";
+            $apiContext->VERSION = "65.1";
+            $apiContext->REDIRECTURL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=";
 	}
 	public function checkOut()
 	{
-        $object = new PaymentRequest($this->apiContext);
-    
-        $data = [];
-        $data['RETURNURL'] = "http://paypal.local.geekydev.com/getDone";
-        $data['CANCELURL'] = "http://paypal.local.geekydev.com/getCancel";
-    
-        $data['CURRENCY'] = "USD";
-        $data['TOTAL_AMOUNT'] = "100";
-        $data['AMOUNT'] = "100";
-        $data['TAX_AMOUNT'] = "0";
-        $data['DESCRIPTION'] = "Movies";
-        $data['PAYMENT_ACTION'] = "SALE";
-        $data['NOSHIPPING'] = "1```";
-    
-        $data['ITEM_LIST'] = [];
-        $data['ITEM_LIST'][0] = [
-        	'NAME'			=> 'First Item Name',
-    		'NUMBER'		=> 123,
-    		'QUANTITY'		=> 1,
-    		'TAX_AMOUNT'	=> 0,
-    		'AMOUNT'		=> 100,
-    		'URL'           => "Your product's url",
-    		'DESCRIPTION'	=> 'First Name Description'
-        ];
-    
-        $object->execute($data);
+            $object = new PaymentRequest($this->apiContext);
+        
+            $data = [];
+            $data['RETURNURL'] = "http://paypal.local.geekydev.com/getDone";
+            $data['CANCELURL'] = "http://paypal.local.geekydev.com/getCancel";
+        
+            $data['CURRENCY'] = "USD";
+            $data['TOTAL_AMOUNT'] = "100";
+            $data['AMOUNT'] = "100";
+            $data['TAX_AMOUNT'] = "0";
+            $data['DESCRIPTION'] = "Movies";
+            $data['PAYMENT_ACTION'] = "SALE";
+            $data['NOSHIPPING'] = "1```";
+        
+            $data['ITEM_LIST'] = [];
+            $data['ITEM_LIST'][0] = [
+            	'NAME'			=> 'First Item Name',
+        		'NUMBER'		=> 123,
+        		'QUANTITY'		=> 1,
+        		'TAX_AMOUNT'	=> 0,
+        		'AMOUNT'		=> 100,
+        		'URL'           => "Your product's url",
+        		'DESCRIPTION'	=> 'First Name Description'
+            ];
+        
+            $object->execute($data);
 	}
 ```
