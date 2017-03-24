@@ -3,7 +3,7 @@ namespace SahusoftCom\PayPal;
 
 use SahusoftCom\PayPal\PayPalHttpPost;
 
-class Payer  {
+class PaymentResponse  {
 
 	public function __construct($apiContext)
 	{

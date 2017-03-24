@@ -3,7 +3,7 @@ namespace SahusoftCom\PayPal;
 
 use SahusoftCom\PayPal\PayPalHttpPost;
 
-class PayPal
+class PaymentRequest
 {
 	public function __construct($apiContext)
 	{
@@ -17,7 +17,7 @@ class PayPal
 		$this->credStr = "USER=" . $this->APIUSERNAME . "&PWD=" . $this->APIPASSWORD . "&SIGNATURE=" . $this->APISIGNATURE . "&VERSION=" . $this->VERSION;
 	}
 
-	public function handle($data) 
+	public function execute($data) 
 	{
 		$data['PAYMENT_ACTION'] = "sale";
 		$data['METHOD'] = "SetExpressCheckout";
