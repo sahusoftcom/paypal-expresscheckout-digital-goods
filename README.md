@@ -53,12 +53,8 @@ class PaymentController {
             $apiContext->ENDPOINT = "https://api-3t.sandbox.paypal.com/nvp";
             $apiContext->VERSION = "65.1";
             $apiContext->REDIRECTURL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=";
-	}
-	public function checkOut()
-	{
-            $object = new PaymentRequest($this->apiContext);
-        
-            $data = [];
+	    
+	    $data = [];
             $data['RETURNURL'] = "http://paypal.local.geekydev.com/getDone";
             $data['CANCELURL'] = "http://paypal.local.geekydev.com/getCancel";
         
@@ -80,7 +76,26 @@ class PaymentController {
         		'URL'           => "Your product's url",
         		'DESCRIPTION'	=> 'First Name Description'
             ];
-        
-            $object->execute($data);
+	}
+	
+	public function checkOut()
+	{
+            $object = new PaymentRequest($this->apiContext);
+            $object->execute($this->data);
+	}
+	
+	public function getDone()
+	{
+		$object = new \SahusoftCom\PayPal\PaymentResponse($apiContext);
+		$response = $object->handle($this->data);
+		
+		echo "<pre>";
+		print_r($response);
+		echo "</pre>";
+	}
+	
+	public function getCancel()
+	{
+		// Do your thing
 	}
 ```
