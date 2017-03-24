@@ -1,40 +1,138 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+PayPal.ExpressCheckout.Digital.Goods Laravel Version: 1.0
+==========================
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Service Provider of PayPal.ExpressCheckout.Digital.Goods API for Laravel PHP Framework [ [Packagist] ]
 
-## About Laravel
+[Packagist]: <https://packagist.org/packages/sahusoftcom/paypal-expresscheckout-digital-goods>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Type the following command in your project directory
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+`composer require sahusoftcom/paypal-expresscheckout-digital-goods`
 
-## Learning Laravel
+OR
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+Add the following line to the `require` section of `composer.json`:
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+```json
+{
+    "require": {
+        "sahusoftcom/paypal-expresscheckout-digital-goods": "dev-master"
+    }
+}
+```
 
-## Contributing
+## Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+In `/config/app.php`, add the following to `providers`:
+  
+```php
+SahusoftCom\Paypal\PayPalServiceProvider::class
+```
 
-## Security Vulnerabilities
+## How to use
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+1. You should use the `PayPal` class to access its function
+2. Pass `apiContext` parameter in `PayPal` Class
 
-## License
+For example:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+```php
+<?php
+namespace App;
+ 
+use SahusoftCom\PayPal\PayPal;
+
+class PayPal
+{	
+	// Example to use ArticleBuilder Service
+	public function firstMethod()
+	{
+		$apiContext = (object)[];
+		
+        $apiContext->APIUSERNAME = "varunsahu-facilitator_api1.yahoo.co.in";
+        $apiContext->APIPASSWORD = "RCGW9N8HMU7Y3M28";
+        $apiContext->APISIGNATURE = "AFcWxV21C7fd0v3bYYYRCpSSRl31ArRWgR3MHk7Bc3HwAOny8r7IGOUh";
+        $apiContext->ENDPOINT = "https://api-3t.sandbox.paypal.com/nvp";
+        $apiContext->VERSION = "65.1";
+        $apiContext->REDIRECTURL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=";
+        
+        $object = new \SahusoftCom\PayPal\PayPal($apiContext);
+        
+        $data = [];
+        $data['RETURNURL'] = "http://paypal.local.geekydev.com/getDone";
+        $data['CANCELURL'] = "http://paypal.local.geekydev.com/getCancel";
+    
+        $data['CURRENCY'] = "USD";
+        $data['TOTAL_AMOUNT'] = "100";
+        $data['AMOUNT'] = "100";
+        $data['TAX_AMOUNT'] = "0";
+        $data['DESCRIPTION'] = "Movies";
+        $data['PAYMENT_ACTION'] = "SALE";
+        $data['NOSHIPPING'] = "1```";
+    
+        $data['ITEM_LIST'] = [];
+        $data['ITEM_LIST'][0] = [
+        	'NAME'			=> 'First Name',
+    		'NUMBER'		=> 123,
+    		'QUANTITY'		=> 1,
+    		'TAX_AMOUNT'	=> 0,
+    		'AMOUNT'		=> 100,
+    		'DESCRIPTION'	=> 'First Name Description'
+        ];
+    
+        $status = $object->handle($data);
+	}
+
+```
+
+## PayPal class Functions
+
+1.	`handle`
+
+	`funtion`: handle($data)
+
+	`require`:
+	```
+	    $data = [];
+	    $data['RETURNURL'] = "route(getDone)";
+	    $data['CANCELURL'] = "route(getCancel)";
+
+	    $data['CURRENCY'] = "USD";
+	    $data['TOTAL_AMOUNT'] = "100";
+	    $data['AMOUNT'] = "100";
+	    $data['TAX_AMOUNT'] = "0";
+	    $data['DESCRIPTION'] = "Movies";
+	    $data['PAYMENT_ACTION'] = "SALE";
+	    $data['NOSHIPPING'] = "1```";
+
+	    $data['ITEM_LIST'] = [];
+	    $data['ITEM_LIST'][0] = [
+	    	'NAME'			=> 'First Name',
+			'NUMBER'		=> 123,
+			'QUANTITY'		=> 1,
+			'TAX_AMOUNT'	=> 0,
+			'AMOUNT'		=> 100,
+			'DESCRIPTION'	=> 'First Name Description'
+	    ];
+
+	Returns:
+		response with status and message.
+	```
+
+## PayPalHttpPost class Functions
+
+1.	`handle`
+
+	`funtion`: handle($myEndpoint, $myApiStr)
+
+	`require`:
+	```
+	$myEndpoint = "https://api-3t.sandbox.paypal.com/nvp";
+	$myApiStr	NVP String
+
+	Returns:
+		makes a curl request and returns response from server.
+	```
+

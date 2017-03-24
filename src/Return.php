@@ -3,20 +3,20 @@ namespace SahusoftCom\PayPal;
 
 use SahusoftCom\PayPal\PayPalHttpPost;
 
-public function __construct($apiContext)
-{
-	$this->APIUSERNAME = $apiContext->APIUSERNAME;
-	$this->APIPASSWORD = $apiContext->APIPASSWORD;
-	$this->APISIGNATURE = $apiContext->APISIGNATURE;
-	$this->ENDPOINT = $apiContext->ENDPOINT;
-	$this->VERSION = $apiContext->VERSION;
-	$this->REDIRECTURL = $apiContext->REDIRECTURL;
-
-	$this->credStr = "USER=" . $this->APIUSERNAME . "&PWD=" . $this->APIPASSWORD . "&SIGNATURE=" . $this->APISIGNATURE . "&VERSION=" . $this->VERSION;
-}
 
 class Return  {
 
+	public function __construct($apiContext)
+	{
+		$this->APIUSERNAME = $apiContext->APIUSERNAME;
+		$this->APIPASSWORD = $apiContext->APIPASSWORD;
+		$this->APISIGNATURE = $apiContext->APISIGNATURE;
+		$this->ENDPOINT = $apiContext->ENDPOINT;
+		$this->VERSION = $apiContext->VERSION;
+		$this->REDIRECTURL = $apiContext->REDIRECTURL;
+
+		$this->credStr = "USER=" . $this->APIUSERNAME . "&PWD=" . $this->APIPASSWORD . "&SIGNATURE=" . $this->APISIGNATURE . "&VERSION=" . $this->VERSION;
+	}
 	//set GET var's to local vars:
 	$token = $_GET['token'];
 	$payerid = $_GET['PayerID'];
