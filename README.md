@@ -1,6 +1,6 @@
 ## PayPal ExpressCheckout Digital Goods Laravel Version: 1.0
 
-Service Provider of PayPal.ExpressCheckout.Digital.Goods API for Laravel PHP Framework 
+Service Provider of PayPal.ExpressCheckout.Digital.Goods API for Laravel PHP Framework [ [Packagist] ]
 [Packagist]: <https://packagist.org/packages/sahusoftcom/paypal-expresscheckout-digital-goods>
 
 ## Installation:
