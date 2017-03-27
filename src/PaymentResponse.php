@@ -104,7 +104,7 @@ class PaymentResponse  {
 			}
 		}
 
-		header('Location: ' . $data['CANCELURL'], true, 302);
+		header('Location: ' . $data['CANCELURL'].'?'.(!empty(http_build_query($doresponse)) ? http_build_query($doresponse) : ''), true, 302);
 		exit();
 	}
 }
