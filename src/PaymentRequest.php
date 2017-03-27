@@ -115,7 +115,6 @@ class PaymentRequest
 			$redirectURL = $this->REDIRECTURL . urldecode($response['TOKEN']);			
 			header('Location: ' . $redirectURL, true, 302);
 			exit();
-
 		}
 		
 		throw new \Exception(!empty($response) ? json_encode($response) : 'API Failed!');
