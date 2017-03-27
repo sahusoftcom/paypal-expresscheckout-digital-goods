@@ -20,14 +20,6 @@ Add the following line to the `require` section of `composer.json`:
 }
 ```
 
-## Setup:
-
-In `/config/app.php`, add the following to `aliases`:
-  
-```php
-'PayPal' => SahusoftCom\PayPal::class,
-```
-
 ## How to use:
 
 * You should use the `PayPal` class to access its function.
@@ -37,8 +29,8 @@ In `/config/app.php`, add the following to `aliases`:
 <?php
 namespace App;
  
-use PayPal\PaymentRequest;
-use PayPal\PaymentResponse;
+use SahusoftCom\PayPal\PaymentRequest;
+use SahusoftCom\PayPal\PaymentResponse;
 
 class PaymentController {	
 
