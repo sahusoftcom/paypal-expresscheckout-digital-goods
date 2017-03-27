@@ -93,14 +93,15 @@ class PaymentResponse  {
 
 		if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
 
-			$nvpStr = "&METHOD=GetTransactionDetails&TRANSACTIONID=" . urldecode($doresponse['PAYMENTINFO_0_TRANSACTIONID']);			    
+			$transactionId = urldecode($doresponse['PAYMENTINFO_0_TRANSACTIONID']);
+			$nvpStr = "&METHOD=GetTransactionDetails&TRANSACTIONID=" . $transactionId;			    
 		    
 		    $reqStr = $this->credStr . $nvpStr;
 			$doresponse = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
 			if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
 
-				header('Location: ' . $data['RETURNURL'].'?'.http_build_query($doresponse), true, 302);
-				exit();
+				$response['TRANSACTIONID'] = $transactionId;
+				return $response;
 			}
 		}
 
