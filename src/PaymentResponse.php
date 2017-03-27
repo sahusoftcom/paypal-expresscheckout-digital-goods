@@ -19,8 +19,8 @@ class PaymentResponse  {
 
 	public function handle($data)
 	{
-		$token = $_GET['TOKEN'];
-		$payerid = $_GET['PAYERID'];
+		$token = $_GET['token'];
+		$payerid = $_GET['PayerID'];
 		
 		$nvpStr = "&METHOD=GetExpressCheckoutDetails&TOKEN=" . urldecode($token);
 		
