@@ -116,9 +116,8 @@ class PaymentRequest
 			header('Location: ' . $redirectURL, true, 302);
 			exit();
 
-		} else if($response['ACK'] == "Failure" || $response['ACK'] == "FailureWithWarning") {
-			
-			return ['response' => $response, 'message' => "The API Call Failed"];
 		}
+		
+		throw new \Exception(!empty($response) ? json_encode($response) : 'API Failed!');
 	}
 }
