@@ -50,7 +50,7 @@ class PaymentController {
 	    $data = [];
             $data['RETURNURL'] = "http://paypal.local.geekydev.com/getDone";
             $data['CANCELURL'] = "http://paypal.local.geekydev.com/getCancel";
-            $data['NOTIFY_URL'] = "http://paypal.local.geekydev.com/getNotified";
+            $data['NOTIFYURL'] = "http://paypal.local.geekydev.com/getNotified";
         
             $data['CURRENCY'] = "USD";
             $data['TOTAL_AMOUNT'] = "100";
