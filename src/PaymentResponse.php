@@ -4,7 +4,7 @@ namespace SahusoftCom\PayPal;
 use SahusoftCom\PayPal\PayPalHttpPost;
 
 class PaymentResponse  {
-
+	
 	public function __construct($apiContext)
 	{
 		$this->APIUSERNAME = $apiContext->APIUSERNAME;
@@ -43,6 +43,9 @@ class PaymentResponse  {
 
 			if ( !empty($data['DESCRIPTION']) )
 				$nvpStr .= "&PAYMENTREQUEST_0_DESC=$data[DESCRIPTION]";
+
+			if ( !empty($data['NOTIFY_URL']) )
+				$nvpStr .= "&PAYMENTREQUEST_0_NOTIFYURL=$data[NOTIFY_URL]";
 				
 			if ( !empty($data['NOSHIPPING']) )
 				$nvpStr .= "&NOSHIPPING=$data[NOSHIPPING]";						// set 1
