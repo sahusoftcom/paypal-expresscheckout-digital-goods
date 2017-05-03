@@ -44,8 +44,8 @@ class PaymentResponse  {
 			if ( !empty($data['DESCRIPTION']) )
 				$nvpStr .= "&PAYMENTREQUEST_0_DESC=$data[DESCRIPTION]";
 
-			if ( !empty($data['NOTIFY_URL']) )
-				$nvpStr .= "&PAYMENTREQUEST_0_NOTIFYURL=$data[NOTIFY_URL]";
+			if ( !empty($data['NOTIFYURL']) )
+				$nvpStr .= "&PAYMENTREQUEST_0_NOTIFYURL=$data[NOTIFYURL]";
 				
 			if ( !empty($data['NOSHIPPING']) )
 				$nvpStr .= "&NOSHIPPING=$data[NOSHIPPING]";						// set 1

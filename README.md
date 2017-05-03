@@ -50,6 +50,7 @@ class PaymentController {
 	    $data = [];
             $data['RETURNURL'] = "http://paypal.local.geekydev.com/getDone";
             $data['CANCELURL'] = "http://paypal.local.geekydev.com/getCancel";
+            $data['NOTIFY_URL'] = "http://paypal.local.geekydev.com/getNotified";
         
             $data['CURRENCY'] = "USD";
             $data['TOTAL_AMOUNT'] = "100";
@@ -57,7 +58,7 @@ class PaymentController {
             $data['TAX_AMOUNT'] = "0";
             $data['DESCRIPTION'] = "Movies";
             $data['PAYMENT_ACTION'] = "SALE";
-            $data['NOSHIPPING'] = "1```";
+            $data['NOSHIPPING'] = "1";
         
             $data['ITEM_LIST'] = [];
             $data['ITEM_LIST'][0] = [
