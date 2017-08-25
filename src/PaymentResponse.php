@@ -103,7 +103,9 @@ class PaymentResponse  {
 			$nvpStr = "&METHOD=GetTransactionDetails&TRANSACTIONID=" . $transactionId;			    
 		    
 		    $reqStr = $this->credStr . $nvpStr;
-			$doresponse = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
+		    
+		    $response = [];
+			$response = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
 			if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
 
 				$doResponse['TRANSACTIONID'] = $transactionId;
