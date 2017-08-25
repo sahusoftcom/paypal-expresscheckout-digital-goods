@@ -107,8 +107,8 @@ class PaymentResponse  {
 			if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
 
 				$doResponse['TRANSACTIONID'] = $transactionId;
-				$doResponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($doresponse['FIRSTNAME']) : '';
-				$doResponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($doresponse['LASTNAME']) : '';
+				$doResponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($response['FIRSTNAME']) : '';
+				$doResponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($response['LASTNAME']) : '';
 				$doResponse['EMAIL'] = !empty($response['EMAIL']) ? urldecode($response['EMAIL']) : '';
 				return $doResponse;
 			}
