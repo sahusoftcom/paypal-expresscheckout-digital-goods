@@ -99,19 +99,19 @@ class PaymentResponse  {
 
 		if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
 
-			// $transactionId = urldecode($doresponse['PAYMENTINFO_0_TRANSACTIONID']);
-			// $nvpStr = "&METHOD=GetTransactionDetails&TRANSACTIONID=" . $transactionId;			    
+			$transactionId = urldecode($doresponse['PAYMENTINFO_0_TRANSACTIONID']);
+			$nvpStr = "&METHOD=GetTransactionDetails&TRANSACTIONID=" . $transactionId;			    
 		    
-		 //    $reqStr = $this->credStr . $nvpStr;
-			// $doresponse = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
-			// if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
+		    $reqStr = $this->credStr . $nvpStr;
+			$doresponse = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
+			if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
 
-			// 	$response['TRANSACTIONID'] = $transactionId;
-			// 	return $response;
-			// }
-
-			$doResponse['TRANSACTIONID'] = urldecode($doresponse['PAYMENTINFO_0_TRANSACTIONID']);
-			return $doResponse;
+				$doResponse['TRANSACTIONID'] = $transactionId;
+				$doResponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($doresponse['FIRSTNAME']) : '';
+				$doResponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($doresponse['LASTNAME']) : '';
+				$doResponse['EMAIL'] = !empty($response['EMAIL']) ? urldecode($response['EMAIL']) : '';
+				return $doResponse;
+			}
 		}
 
 		header('Location: ' . $data['CANCELURL'].'?'.(!empty(http_build_query($doresponse)) ? http_build_query($doresponse) : ''), true, 302);
