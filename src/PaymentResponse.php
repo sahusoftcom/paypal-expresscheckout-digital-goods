@@ -106,7 +106,7 @@ class PaymentResponse  {
 		    
 		    $response = [];
 			$response = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
-			if ( !empty($doresponse) && ($doresponse['ACK'] == "Success" || $doresponse['ACK'] == "SuccessWithWarning") ) {
+			if ( !empty($response) && ($response['ACK'] == "Success" || $response['ACK'] == "SuccessWithWarning") ) {
 
 				$doResponse['TRANSACTIONID'] = $transactionId;
 				$doResponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($response['FIRSTNAME']) : '';
