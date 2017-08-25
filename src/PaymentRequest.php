@@ -57,6 +57,9 @@ class PaymentRequest
 		. "&PAYMENTREQUEST_0_TAXAMT=$data[TAX_AMOUNT]"
 		. "&PAYMENTREQUEST_0_PAYMENTACTION=$data[PAYMENT_ACTION]";
 
+		if ( !empty($data['NOTIFYURL']) )
+			$nvpStr .= "&PAYMENTREQUEST_0_NOTIFYURL=$data[NOTIFYURL]";
+
 		if ( !empty($data['DESCRIPTION']) )
 			$nvpStr .= "&PAYMENTREQUEST_0_DESC=$data[DESCRIPTION]";
 			
