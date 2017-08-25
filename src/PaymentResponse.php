@@ -112,6 +112,7 @@ class PaymentResponse  {
 				$doResponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($response['FIRSTNAME']) : '';
 				$doResponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($response['LASTNAME']) : '';
 				$doResponse['EMAIL'] = !empty($response['EMAIL']) ? urldecode($response['EMAIL']) : '';
+				$doResponse['ACK'] = !empty($response['ACK']) ? urldecode($response['ACK']) : '';
 				return $doResponse;
 			}
 		}
