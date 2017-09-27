@@ -113,6 +113,8 @@ class PaymentResponse  {
 				$doResponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($response['LASTNAME']) : '';
 				$doResponse['EMAIL'] = !empty($response['EMAIL']) ? urldecode($response['EMAIL']) : '';
 				$doResponse['ACK'] = !empty($response['ACK']) ? urldecode($response['ACK']) : '';
+				$doResponse['PAYMENTREQUEST_0_AMT'] = !empty($response['PAYMENTREQUEST_0_AMT']) ? urldecode($response['PAYMENTREQUEST_0_AMT']) : '';
+				$doResponse['PAYMENTREQUEST_0_CURRENCYCODE'] = !empty($response['PAYMENTREQUEST_0_CURRENCYCODE']) ? urldecode($response['PAYMENTREQUEST_0_CURRENCYCODE']) : '';
 				return $doResponse;
 			}
 		}
