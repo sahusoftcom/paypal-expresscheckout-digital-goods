@@ -108,14 +108,14 @@ class PaymentResponse  {
 			$response = PayPalHttpPost::handle($this->ENDPOINT, $reqStr);
 			if ( !empty($response) && ($response['ACK'] == "Success" || $response['ACK'] == "SuccessWithWarning") ) {
 
-				$doResponse['TRANSACTIONID'] = $transactionId;
-				$doResponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($response['FIRSTNAME']) : '';
-				$doResponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($response['LASTNAME']) : '';
-				$doResponse['EMAIL'] = !empty($response['EMAIL']) ? urldecode($response['EMAIL']) : '';
-				$doResponse['ACK'] = !empty($response['ACK']) ? urldecode($response['ACK']) : '';
-				$doResponse['PAYMENTREQUEST_0_AMT'] = !empty($response['AMT']) ? urldecode($response['AMT']) : '';
-				$doResponse['PAYMENTREQUEST_0_CURRENCYCODE'] = !empty($response['CURRENCYCODE']) ? urldecode($response['CURRENCYCODE']) : '';
-				return $doResponse;
+				$doresponse['TRANSACTIONID'] = $transactionId;
+				$doresponse['FIRSTNAME'] = !empty($response['FIRSTNAME']) ? urldecode($response['FIRSTNAME']) : '';
+				$doresponse['LASTNAME'] = !empty($response['LASTNAME']) ? urldecode($response['LASTNAME']) : '';
+				$doresponse['EMAIL'] = !empty($response['EMAIL']) ? urldecode($response['EMAIL']) : '';
+				$doresponse['ACK'] = !empty($response['ACK']) ? urldecode($response['ACK']) : '';
+				$doresponse['PAYMENTREQUEST_0_AMT'] = !empty($response['AMT']) ? urldecode($response['AMT']) : '';
+				$doresponse['PAYMENTREQUEST_0_CURRENCYCODE'] = !empty($response['CURRENCYCODE']) ? urldecode($response['CURRENCYCODE']) : '';
+				return $doresponse;
 			}
 		}
 
